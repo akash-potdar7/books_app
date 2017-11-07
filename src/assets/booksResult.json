@@ -1,0 +1,32 @@
+[
+    {
+        "isbn": 1,
+        "name": "The Alchemist",
+        "genre": "Spirutual",
+        "author": "Paulo Coelo"
+    },
+    {
+        "isbn": 2,
+        "name": "Then There were none",
+        "genre": "Thriller",
+        "author": "Agatha Cristie"
+    },
+    {
+        "isbn": 3,
+        "name": "To Kill a Mockingibrd",
+        "genre": "Philoso",
+        "author": "Paulo Coelo"
+    },
+    {
+        "isbn": 4,
+        "name": "The Alchemist",
+        "genre": "Spirutual",
+        "author": "Paulo Coelo"
+    },
+    {
+        "isbn": 5,
+        "name": "Everyone as a Story",
+        "genre": "Drama",
+        "author": "Savi Sharma"
+    }
+]

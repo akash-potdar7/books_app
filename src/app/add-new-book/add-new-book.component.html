@@ -6,29 +6,41 @@
       
       <form class="form" #bookForm="ngForm">
         <mat-form-field hintLabel="Max 13 characters">
-          <input matInput maxlength="13" placeholder="ISBN" [(ngModel)]="book.isbn" #isbn name="isbn">
+          <input matInput maxlength="13" placeholder="ISBN" [(formControl)]="isbnFormControl" [(ngModel)]="book.isbn" #isbn name="isbn">
           <mat-hint align="end">{{isbn.value?.length || 0}}/13</mat-hint>
+          <mat-error *ngIf="isbnFormControl.hasError('pattern')">
+            Please enter a valid ISBN (only 13 digits)
+          </mat-error>
+          <mat-error *ngIf="isbnFormControl.hasError('required')">
+            ISBN is <strong>required</strong>
+          </mat-error>
         </mat-form-field>
         <mat-form-field class="form-card">
-            <input matInput placeholder="Book Name" [(ngModel)]="book.name" name="name">
+            <input matInput placeholder="Book Name" [(formControl)]="bookNameFormControl" [(ngModel)]="book.name" name="name">
+            <mat-error *ngIf="bookNameFormControl.hasError('required')">
+              Book name is <strong>required</strong>
+            </mat-error>
         </mat-form-field>
         <mat-form-field>
-            <mat-select placeholder="Genre" [(ngModel)]="book.genre" name="genre">
+            <mat-select placeholder="Genre" [(formControl)]="bookGenreFormControl" [(ngModel)]="book.genre" name="genre">
               <mat-option>None</mat-option>
               <mat-option *ngFor="let genre of genres" [value]="genre.viewValue">{{genre.viewValue}}</mat-option>
             </mat-select>
+            <mat-error *ngIf="bookGenreFormControl.hasError('required')">
+                Genre is <strong>required</strong>
+              </mat-error>
         </mat-form-field>
         <mat-form-field class="form-card">
-            <input matInput placeholder="Book Author" [(ngModel)]="book.author" name="author">
+            <input matInput placeholder="Book Author" [(formControl)]="bookAuthorFormControl" [(ngModel)]="book.author" name="author">
+            <mat-error *ngIf="bookAuthorFormControl.hasError('required')">
+              Author is <strong>required</strong>
+            </mat-error>
         </mat-form-field>
       </form>
-
-      <!-- Test -->
-      <!-- <mat-form-field><input matInput [(ngModel)]="data" placeholder="Enter data"></mat-form-field> -->
 
     </mat-card-content>
     <mat-card-actions>
       <button mat-button (click)="onSubmit(book)" type="submit">Save</button>
-      <button mat-button>Cancel</button>
+      <button mat-button (click)="resetData(book)">Cancel</button>
     </mat-card-actions>
   </mat-card>

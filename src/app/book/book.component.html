@@ -1,9 +1,13 @@
 <mat-card>
-    <p-dataTable [value]="books" [rows]="10" [paginator]="true" [pageLinks]="3" [rowsPerPageOptions]="[2,4,10]">
-        <p-header><strong>List of Books</strong></p-header>
+    <p-dataTable [value]="books" selectionMode="single" [(selection)]="selectedBook" (onRowSelect)="onRowSelect($event)" [rows]="10" [paginator]="true"
+     [pageLinks]="3" [rowsPerPageOptions]="[2,4,10]" [responsive]="true" [stacked]="stacked">
+        <p-header><span style="float: left;"><strong>List of Books</strong></span>&nbsp;<span style="float: right;">{{textGridCurrentPage}}&nbsp;{{totalRecords}}</span></p-header>
         <p-column field="isbn" header="ISBN"></p-column>
         <p-column field="name" header="Name"></p-column>
         <p-column field="genre" header="Genre"></p-column>
         <p-column field="author" header="Auhtor"></p-column>
+        <p-footer>
+            <button type="button" (click)="toggle()" style="margin-bottom:10px; float: left;" label="Toggle">Change view</button>&nbsp;
+        </p-footer>
     </p-dataTable>
 </mat-card>

@@ -15,10 +15,13 @@ export class BookService {
   private staticUrl = 'assets/booksResult.json';
   private headers = new Headers({ 'Content-Type': 'application/json' });
   private saveBookSURL = '/api/saveBook';
+  private getGenreData = '/api/getGenreData';
 
   getBooks(): Observable<any> {
     //return this.http.get(this.staticUrl).map(response => response.json());
-    return this.http.get(this.getAllBooksSURL).map(response =>{console.log(response.json()); return response.json()});
+    return this.http.get(this.getAllBooksSURL).map(response => {
+      console.log("response= "+response.json());
+      return response.json()});
   }
 
   saveBook(book: Book): Promise<Book[]> {
@@ -27,6 +30,14 @@ export class BookService {
         .toPromise()
         .then(response => {console.log(response);return response.json() as Book[]})
         .catch(this.handleError);
+  }
+
+  getGenreDropDownData(): Observable<any> {
+    console.log('BookService.getGenreDropDownData()');
+    let data: any[];
+    return this.http.get(this.getGenreData).map(response => {
+      console.log(response.json());
+      return response.json()});
   }
 
   private handleError(error: any): Promise<any> {

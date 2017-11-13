@@ -24,7 +24,7 @@
         <mat-form-field>
             <mat-select placeholder="Genre" [(formControl)]="bookGenreFormControl" [(ngModel)]="book.genre" name="genre">
               <mat-option>None</mat-option>
-              <mat-option *ngFor="let genre of genres" [value]="genre.viewValue">{{genre.viewValue}}</mat-option>
+              <mat-option *ngFor="let genre of genres" [value]="genre.genre">{{genre.genre}}</mat-option>
             </mat-select>
             <mat-error *ngIf="bookGenreFormControl.hasError('required')">
                 Genre is <strong>required</strong>
@@ -40,7 +40,7 @@
 
     </mat-card-content>
     <mat-card-actions>
-      <button mat-button (click)="onSubmit(book)" type="submit">Save</button>
+      <button mat-button (click)="saveBook(book)" type="submit">Save</button>
       <button mat-button (click)="resetData(book)">Cancel</button>
     </mat-card-actions>
   </mat-card>

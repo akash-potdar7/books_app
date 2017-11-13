@@ -26,6 +26,10 @@ export class BookComponent implements OnInit {
 
   ngOnInit() {
     console.log("in ngOnInit() of BookComponent");
+    this.getRecordCount();
+  }
+
+  getRecordCount() {
     this.bookService.getBooks().subscribe(data => {
       this.books = data;
       this.totalRecords = data? data.length: 0;

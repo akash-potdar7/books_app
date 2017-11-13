@@ -6,6 +6,11 @@ import { FormControl, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
 
 const isbn_regex = /^\d+$/;
+const dataResetMsgS = 'Data has been reset.';
+const dataResetMsgF = 'Reset mode is OFF. Cannot clear data.';
+const done = 'Done';
+const dataErr = 'Fill in all the data please..!';
+const okay = 'okay';
 
 @Component({
   selector: 'app-add-new-book',
@@ -18,9 +23,7 @@ export class AddNewBookComponent implements OnInit {
   //private book: Book = new Book(456, 'Chasing Tomorrow', 'Thriller', 'Sydney Sheldon');
   private genres: any;
   
-  public isbnFormControl = new FormControl('', [
-    Validators.required,
-    Validators.pattern(isbn_regex)]);
+  public isbnFormControl = new FormControl('', [ Validators.required, Validators.pattern(isbn_regex) ]);
   public bookNameFormControl = new FormControl('',[ Validators.required ]);
   public bookGenreFormControl = new FormControl('',[ Validators.required ]);
   public bookAuthorFormControl = new FormControl('',[ Validators.required] );
@@ -42,39 +45,43 @@ export class AddNewBookComponent implements OnInit {
   }
 
   resetData(book): void {
-    this.book = {}; // Need to take this off for the hard-coded form.
+    this.book = {};  // Need to comment this out for the hard-coded form.
+    let resetMode = 'ON'; // Plus change this to ON when book is set empty.
     this.isbnFormControl.markAsUntouched();
     this.bookNameFormControl.markAsUntouched();
     this.bookGenreFormControl.markAsUntouched();
     this.bookGenreFormControl.setErrors(null);
     this.bookAuthorFormControl.markAsUntouched();
-    this.snackBar.open("Data has been reset.", "Done", {duration: 2000});
+    if(resetMode === 'ON') {
+      this.snackBar.open(dataResetMsgS, done, {duration: 2000});
+    } else {
+      this.snackBar.open(dataResetMsgF, done, {duration: 4000});
+    }
   }
 
   saveBook(book: Book): void {
     let res: any;
     if (this.validateBookInputs(book)) {
-      let formattedBookJson: any;
+      let formattedGenreJson: any;
       for (let entry of this.genres) {
-        console.log(entry);
         if(entry.genre === book.genre) {
-          formattedBookJson = entry;
+          formattedGenreJson = entry;
         }
       }
       let formattedBook = {
         isbn: book.isbn,
         name: book.name,
-        genre: formattedBookJson,
-        author: book.author
+        genre: formattedGenreJson,
+        author: book.author,
+        genreId: formattedGenreJson.id
       };
       book = formattedBook;
-      console.log(book);
       res = this.bookService.saveBook(book);
       if (res) {
-        this.snackBar.open(book.name + " saved..!", "Done", {duration: 2000});
+        this.snackBar.open(book.name + " saved..!", done, {duration: 2000});
       }
     } else {
-      this.snackBar.open("Fill in all the data please..!", "Okay", {duration: 3000});
+      this.snackBar.open(dataErr, okay, {duration: 3000});
     }
   }
 

@@ -20,24 +20,19 @@ export class BookService {
   getBooks(): Observable<any> {
     //return this.http.get(this.staticUrl).map(response => response.json());
     return this.http.get(this.getAllBooksSURL).map(response => {
-      console.log("response= "+response.json());
       return response.json()});
   }
 
   saveBook(book: Book): Promise<Book[]> {
-    console.log("onSubmit ->in BookService.saveBook() book= "+ JSON.stringify(book));
     return this.http.post(this.saveBookSURL, JSON.stringify(book), {headers: this.headers})
         .toPromise()
-        .then(response => {console.log(response);return response.json() as Book[]})
+        .then(response => response.json() as Book[])
         .catch(this.handleError);
   }
 
   getGenreDropDownData(): Observable<any> {
-    console.log('BookService.getGenreDropDownData()');
     let data: any[];
-    return this.http.get(this.getGenreData).map(response => {
-      console.log(response.json());
-      return response.json()});
+    return this.http.get(this.getGenreData).map(response => response.json());
   }
 
   private handleError(error: any): Promise<any> {

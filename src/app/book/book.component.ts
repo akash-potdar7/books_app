@@ -21,11 +21,9 @@ export class BookComponent implements OnInit {
   totalRecords: number;
 
   constructor(private bookService: BookService) {
-    console.log("in BookComponent");
   }
 
   ngOnInit() {
-    console.log("in ngOnInit() of BookComponent");
     this.getRecordCount();
   }
 
@@ -33,7 +31,6 @@ export class BookComponent implements OnInit {
     this.bookService.getBooks().subscribe(data => {
       this.books = data;
       this.totalRecords = data? data.length: 0;
-      console.log(this.totalRecords);
     });
   }
 

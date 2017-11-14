@@ -8,7 +8,5 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'BooksApp';
 
-  constructor () {
-    console.log("in AppComponent");
-  }
+  constructor () {}
 }

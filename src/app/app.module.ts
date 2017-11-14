@@ -2,6 +2,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+
 import { HttpModule } from '@angular/http'
 import { AppComponent } from './app.component';
 import { BookComponent } from './book/book.component';
@@ -25,8 +27,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { DataGridModule, Header, Footer, DataTableModule, SharedModule } from 'primeng/primeng';
 import { AddNewBookComponent } from './add-new-book/add-new-book.component';
-
-//ag-grid
 
 const routes: Routes = [
   { path: 'books', component: BookComponent },
@@ -55,6 +55,7 @@ const routes: Routes = [
     MatSnackBarModule,
     HttpModule,
     RouterModule.forRoot(routes),
+    NgbModule.forRoot(),
     DataGridModule,
     DataTableModule,
     SharedModule

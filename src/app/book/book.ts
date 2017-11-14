@@ -1,6 +1,9 @@
 // Bean class.
 export class Book {
 
+
+    //constructor(){}
+
     constructor (
         public isbn: number,
         public name: string,

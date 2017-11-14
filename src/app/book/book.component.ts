@@ -3,9 +3,6 @@ import { Book } from './book';
 import { Router } from '@angular/router';
 import { BookService } from './book.service';
 
-import "ag-grid/dist/styles/ag-grid.css";
-import "ag-grid/dist/styles/theme-fresh.css";
-
 @Component({
   selector: 'app-book',
   templateUrl: './book.component.html',
@@ -13,7 +10,8 @@ import "ag-grid/dist/styles/theme-fresh.css";
   providers: []
 })
 export class BookComponent implements OnInit {
-
+  
+  book: Book;
   textGridCurrentPage: String = 'Total records: ';
   books: Book[];
   selectedBook: Book;
@@ -35,7 +33,9 @@ export class BookComponent implements OnInit {
   }
 
   onRowSelect(event) {
-    console.log(event.data)
+    console.log(event.data);
+    let tempBook = event.data;
+
   }
 
   toggle() {

@@ -10,7 +10,10 @@ import { NgbModal, ModalDismissReasons, NgbActiveModal } from '@ng-bootstrap/ng-
 })
 export class NgbdModalContent {
   @Input() name;
-  constructor(public activeModal: NgbActiveModal) {}
+
+  constructor(public activeModal: NgbActiveModal) {
+    this.name = 'Aakash';
+  }
 
   save() {
     console.log('NgbdModalContent.save()');
@@ -24,9 +27,8 @@ export class NgbdModalContent {
   providers: []
 })
 export class BookComponent implements OnInit {
-  
-  closeResult: string;
 
+  closeResult: string;
   book: Book;
   textGridCurrentPage: String = 'Total records: ';
   books: Book[];

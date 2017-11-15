@@ -1,1 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
+.fade.show{
+    display: block !important;
+    opacity: 1;
+}
+.modal-content {
+    top: 40px;
+    border-radius: 0px !important;
+}

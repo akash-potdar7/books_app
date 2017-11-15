@@ -2,11 +2,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { HttpModule } from '@angular/http'
 import { AppComponent } from './app.component';
-import { BookComponent } from './book/book.component';
+import { BookComponent, NgbdModalContent } from './book/book.component';
 import { BookService } from './book/book.service';
 
 //import { AppRoutingModule } from './app-routing/app-routing.module';
@@ -34,11 +34,6 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    BookComponent,
-    AddNewBookComponent
-  ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -60,6 +55,13 @@ const routes: Routes = [
     DataTableModule,
     SharedModule
   ],
+  declarations: [
+    AppComponent,
+    BookComponent,
+    AddNewBookComponent,
+    NgbdModalContent
+  ],
+  entryComponents: [NgbdModalContent],
   providers: [BookService],
   bootstrap: [AppComponent]
 })

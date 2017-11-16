@@ -6,7 +6,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { HttpModule } from '@angular/http'
 import { AppComponent } from './app.component';
-import { BookComponent, NgbdModalContent } from './book/book.component';
+import { BookComponent } from './book/book.component';
 import { BookService } from './book/book.service';
 
 //import { AppRoutingModule } from './app-routing/app-routing.module';
@@ -27,6 +27,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { DataGridModule, Header, Footer, DataTableModule, SharedModule } from 'primeng/primeng';
 import { AddNewBookComponent } from './add-new-book/add-new-book.component';
+import { NgbdModalComponent } from './book/NgbdModalComponent';
+import { DataService } from './common/data.service';
 
 const routes: Routes = [
   { path: 'books', component: BookComponent },
@@ -59,11 +61,11 @@ const routes: Routes = [
     AppComponent,
     BookComponent,
     AddNewBookComponent,
-    NgbdModalContent
+    NgbdModalComponent
   ],
-  entryComponents: [NgbdModalContent],
-  providers: [BookService],
-  bootstrap: [AppComponent]
+  entryComponents: [ NgbdModalComponent ],
+  providers: [ BookService, DataService ],
+  bootstrap: [ AppComponent ]
 })
 export class AppModule {
 

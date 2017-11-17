@@ -11,7 +11,7 @@ import { OnInit } from "@angular/core/src/metadata/lifecycle_hooks";
   export class NgbdModalComponent implements OnInit {
 
     header: string;
-    book: Book;
+    private book: any = {};
 
     constructor(public activeModal: NgbActiveModal, public dataService: DataService) {
       this.header = 'Update: ';
@@ -19,6 +19,7 @@ import { OnInit } from "@angular/core/src/metadata/lifecycle_hooks";
 
     ngOnInit(): void {
       let book: Book = this.dataService.getData();
+      console.log(book);
       this.populateData(book);
     }
 
@@ -28,8 +29,8 @@ import { OnInit } from "@angular/core/src/metadata/lifecycle_hooks";
     }
 
     //Implementation pending.
-    updateBook() {
-      console.log('NgbdModalContent.update()');
+    updateBook(book) {
+      console.log('NgbdModalContent.update()' + book.name);
     }
 
 }

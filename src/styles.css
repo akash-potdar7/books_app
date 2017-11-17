@@ -4,6 +4,9 @@
     opacity: 1;
 }
 .modal-content {
-    top: 70px;
+    top: 100px;
     border-radius: 0px !important;
+}
+.update-form {
+    width: 530px !important;
 }

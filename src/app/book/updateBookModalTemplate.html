@@ -1,18 +1,36 @@
 <div class="modal-header">
-    <h4 class="modal-title">{{header}}</h4>
+    <h3 class="modal-title">{{header}}</h3>
     <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
         <span aria-hidden="true">&times;</span>
     </button>
 </div>
 <div class="modal-body">
-    <div class="container">
-       {{book.name}}
-       {{book.isbn}}
-       {{book.genreId}}
-       {{book.author}}
+    <div class="container"> 
+       <form class="update-form">
+           <div class="form-group">
+                <label for="isbn">ISBN</label>
+                <input type="text" id="isbn" name="isbn" class="form-control" [(ngModel)]="updateBook.isbn">
+           </div>
+           <div class="form-group">
+               <label for="name">Name</label>
+               <input type="text" id="name" name="name" class="form-control"  [(ngModel)]="updateBook.name">
+           </div>
+           <div class="form-group">
+               <label for="genre"></label>
+               <select name="genre" [(ngModel)]="updateBook.genre">
+                    <option *ngFor="let genre of genres" [value]="genre.genre">
+                        {{genre.genre}}
+                    </option>
+               </select>
+           </div>
+           <div class="form-group">
+               <label for="author">Author</label>
+               <input type="text" id="author" name="author" class="form-control" [(ngModel)]="updateBook.author">
+           </div>
+       </form>
     </div>
 </div>
 <div class="modal-footer">
-    <button type="button" class="btn btn-secondary" (click)="updateBook()">Update</button>
+    <button type="button" class="btn btn-secondary" (click)="updateBook(book)">Update</button>
     <button type="button" class="btn btn-secondary" (click)="activeModal.close('Close click')">Close</button>
 </div>

@@ -20,18 +20,47 @@ export class BookComponent implements OnInit {
   books: Book[];
   stacked: boolean;
   totalRecords: number;
+  private genreData: any;
 
   constructor(private bookService: BookService, private modalService: NgbModal, public dataService: DataService) {
   }
 
   ngOnInit() {
-    this.getRecordCount();
+    let genres;
+    this.loadGeners();
   }
 
-  getRecordCount() {
+  loadGeners() {
+    let genres;
+    this.bookService.getGenreDropDownData().subscribe(data => {
+      genres = data;
+      this.genreData = genres;
+      this.getAllBooks();
+    });
+  }
+
+  getAllBooks() {
+    let genres = this.genreData;
+    let tempBook: Book;
+    //let listTempBooks: Book[];
+    let listTempBooks : Array<Book> = [];
     this.bookService.getBooks().subscribe(data => {
-      this.books = data;
-      this.totalRecords = data? data.length: 0;
+      data.forEach(book => {
+        genres.forEach(genre => {
+          if(book.genreId === genre.id) {
+            tempBook = {
+              isbn: book.isbn,
+              name: book.name,
+              genre: genre,
+              author: book.author,
+              genreId: book.genreId
+            };
+          }
+        });
+        listTempBooks.push(tempBook);
+      });
+      this.books = listTempBooks;
+      this.totalRecords = data ? data.length : 0;
     });
   }
 

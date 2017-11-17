@@ -8,7 +8,8 @@ export class Book {
         public isbn: number,
         public name: string,
         public genre: Object,
-        public author: string
+        public author: string,
+        public genreId: number
     ) {}
    
 }

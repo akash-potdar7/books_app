@@ -3,6 +3,7 @@ import { Book } from "./book";
 import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
 import { DataService } from "../common/data.service";
 import { OnInit } from "@angular/core/src/metadata/lifecycle_hooks";
+import { BookService } from "./book.service";
 
 @Component({
     selector: 'ngbd-modal-content',
@@ -11,26 +12,31 @@ import { OnInit } from "@angular/core/src/metadata/lifecycle_hooks";
   export class NgbdModalComponent implements OnInit {
 
     header: string;
-    private book: any = {};
+    private updateBookObj: any = {};
+    private genres: any;
 
-    constructor(public activeModal: NgbActiveModal, public dataService: DataService) {
+    constructor(public activeModal: NgbActiveModal, public dataService: DataService, private bookService: BookService) {
       this.header = 'Update: ';
     }
 
     ngOnInit(): void {
+      let genres;
+      this.bookService.getGenreDropDownData().subscribe(data => {
+        genres = data;
+        this.genres = genres;
+      });
       let book: Book = this.dataService.getData();
-      console.log(book);
       this.populateData(book);
     }
 
     populateData(book: Book) {
       console.log(book)
-      this.book = book;
+      this.updateBookObj = book;
     }
 
     //Implementation pending.
     updateBook(book) {
-      console.log('NgbdModalContent.update()' + book.name);
+      console.log('NgbdModalContent.update()' + book);
     }
 
 }

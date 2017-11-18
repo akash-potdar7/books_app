@@ -34,9 +34,12 @@ import { BookService } from "./book.service";
       this.updateBookObj = book;
     }
 
-    //Implementation pending.
-    updateBook(book) {
-      console.log('NgbdModalContent.update()' + book);
+    updateBook(book: Book) {
+      this.bookService.updateBook(book);
+    }
+
+    deleteBook(book: Book) {
+      this.bookService.deleteBook(book);
     }
 
 }

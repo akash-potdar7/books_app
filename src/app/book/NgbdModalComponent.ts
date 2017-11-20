@@ -35,7 +35,13 @@ import { BookService } from "./book.service";
     }
 
     updateBook(book: Book) {
-      this.bookService.updateBook(book);
+      let res: any = this.bookService.updateBook(book)
+      if(res) {
+        this.activeModal.close('updateBookSuccess');
+      } else {
+        this.activeModal.close('updateError');
+        console.log('Some error occurred');
+      }
     }
 
     deleteBook(book: Book) {

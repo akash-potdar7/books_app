@@ -6,6 +6,7 @@ import { NgbModal, ModalDismissReasons, NgbActiveModal } from '@ng-bootstrap/ng-
 import { ViewChild } from '@angular/core/src/metadata/di';
 import { NgbdModalComponent } from './NgbdModalComponent';
 import { DataService } from '../common/data.service';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-book',
@@ -22,7 +23,8 @@ export class BookComponent implements OnInit {
   totalRecords: number;
   private genreData: any;
 
-  constructor(private bookService: BookService, private modalService: NgbModal, public dataService: DataService) {
+  constructor(private bookService: BookService, private modalService: NgbModal, public dataService: DataService,
+              private snackBar: MatSnackBar)  {
   }
 
   ngOnInit() {
@@ -67,7 +69,16 @@ export class BookComponent implements OnInit {
   onRowSelect(event) {
     let tempBook: Book = event.data;
     this.dataService.setData(tempBook);
-    this.modalService.open(NgbdModalComponent);
+    this.modalService.open(NgbdModalComponent).result.
+      then((result)=>{
+        if(result === 'updateBookSuccess') {
+          this.snackBar.open(tempBook.name + ' updated successfully', 'Done', {duration: 4000});
+        }
+        }, (reason)=>{
+          console.log(reason);
+          this.snackBar.open(tempBook.name + ' failed to update!', 'Done', {duration: 4000});
+        }
+      );
   }
 
   toggle() {

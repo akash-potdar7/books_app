@@ -7,6 +7,7 @@ import { ViewChild } from '@angular/core/src/metadata/di';
 import { NgbdModalComponent } from './NgbdModalComponent';
 import { DataService } from '../common/data.service';
 import { MatSnackBar } from '@angular/material';
+import { DataTable } from 'primeng/components/datatable/datatable';
 
 @Component({
   selector: 'app-book',
@@ -24,7 +25,7 @@ export class BookComponent implements OnInit {
   private genreData: any;
 
   constructor(private bookService: BookService, private modalService: NgbModal, public dataService: DataService,
-              private snackBar: MatSnackBar)  {
+    private snackBar: MatSnackBar) {
   }
 
   ngOnInit() {
@@ -45,11 +46,11 @@ export class BookComponent implements OnInit {
     let genres = this.genreData;
     let tempBook: Book;
     //let listTempBooks: Book[];
-    let listTempBooks : Array<Book> = [];
+    let listTempBooks: Array<Book> = [];
     this.bookService.getBooks().subscribe(data => {
       data.forEach(book => {
         genres.forEach(genre => {
-          if(book.genreId === genre.id) {
+          if (book.genreId === genre.id) {
             tempBook = {
               isbn: book.isbn,
               name: book.name,
@@ -70,15 +71,27 @@ export class BookComponent implements OnInit {
     let tempBook: Book = event.data;
     this.dataService.setData(tempBook);
     this.modalService.open(NgbdModalComponent).result.
-      then((result)=>{
-        if(result === 'updateBookSuccess') {
-          this.snackBar.open(tempBook.name + ' updated successfully', 'Done', {duration: 4000});
+      then((result) => {
+        if (result === 'updateBookSuccess') {
+          this.snackBar.open(tempBook.name + ' updated successfully', 'Done', { duration: 4000 });
+        } else if (result === 'deleteBookSuccess') {
+          this.snackBar.open(tempBook.name + ' deleted successfully', 'Done', { duration: 4000 });
         }
-        }, (reason)=>{
+        }, (reason) => {
           console.log(reason);
-          this.snackBar.open(tempBook.name + ' failed to update!', 'Done', {duration: 4000});
+          this.snackBar.open(tempBook.name + ' Error..!', 'Done', { duration: 4000 });
         }
       );
+  }
+
+  // not working
+  onValueChange(value: any) {
+    console.log('YEss..!');
+    console.log('New Value= ' + value);
+  }
+
+  update(dt: DataTable) {
+    dt.reset();
   }
 
   toggle() {

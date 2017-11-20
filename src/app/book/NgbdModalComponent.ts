@@ -45,7 +45,13 @@ import { BookService } from "./book.service";
     }
 
     deleteBook(book: Book) {
-      this.bookService.deleteBook(book);
+      let res: any = this.bookService.deleteBook(book);
+      if (res) {
+        this.activeModal.close('deleteBookSuccess');
+      } else {
+        this.activeModal.close('deleteError');
+      }
+      
     }
 
 }

@@ -72,6 +72,7 @@ export class BookComponent implements OnInit {
     this.dataService.setData(tempBook);
     this.modalService.open(NgbdModalComponent).result.
       then((result) => {
+        this.getAllBooks();
         if (result === 'updateBookSuccess') {
           this.snackBar.open(tempBook.name + ' updated successfully', 'Done', { duration: 4000 });
         } else if (result === 'deleteBookSuccess') {
@@ -88,10 +89,6 @@ export class BookComponent implements OnInit {
   onValueChange(value: any) {
     console.log('YEss..!');
     console.log('New Value= ' + value);
-  }
-
-  update(dt: DataTable) {
-    dt.reset();
   }
 
   toggle() {
